@@ -1,0 +1,63 @@
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.csproj.AssemblyReference.cache
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.GeneratedMSBuildEditorConfig.editorconfig
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.AssemblyInfoInputs.cache
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.AssemblyInfo.cs
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.csproj.CoreCompileInputs.cache
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.csproj.AssemblyReference.cache
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.GeneratedMSBuildEditorConfig.editorconfig
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.AssemblyInfoInputs.cache
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.AssemblyInfo.cs
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.csproj.CoreCompileInputs.cache
+E:/web/Own/libs/libs/PadDatePicker/bin/Debug/net8.0/PadDatePicker.staticwebassets.runtime.json
+E:/web/Own/libs/libs/PadDatePicker/bin/Debug/net8.0/PadDatePicker.deps.json
+E:/web/Own/libs/libs/PadDatePicker/bin/Debug/net8.0/PadDatePicker.dll
+E:/web/Own/libs/libs/PadDatePicker/bin/Debug/net8.0/PadDatePicker.pdb
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets.build.json
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets.development.json
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets/msbuild.PadDatePicker.Microsoft.AspNetCore.StaticWebAssets.props
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets/msbuild.build.PadDatePicker.props
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.PadDatePicker.props
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.PadDatePicker.props
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets.pack.json
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/scopedcss/bundle/PadDatePicker.styles.css
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.dll
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/refint/PadDatePicker.dll
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.pdb
+E:/web/Own/libs/libs/PadDatePicker/obj/Debug/net8.0/ref/PadDatePicker.dll
+/Users/reza/Projects/libs/PadDatePicker/bin/Debug/net8.0/PadDatePicker.staticwebassets.runtime.json
+/Users/reza/Projects/libs/PadDatePicker/bin/Debug/net8.0/PadDatePicker.deps.json
+/Users/reza/Projects/libs/PadDatePicker/bin/Debug/net8.0/PadDatePicker.dll
+/Users/reza/Projects/libs/PadDatePicker/bin/Debug/net8.0/PadDatePicker.pdb
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets.build.json
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets.development.json
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets/msbuild.PadDatePicker.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets/msbuild.build.PadDatePicker.props
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.PadDatePicker.props
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.PadDatePicker.props
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/staticwebassets.pack.json
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/scopedcss/bundle/PadDatePicker.styles.css
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.dll
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/refint/PadDatePicker.dll
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/PadDatePicker.pdb
+/Users/reza/Projects/libs/PadDatePicker/obj/Debug/net8.0/ref/PadDatePicker.dll
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\bin\Debug\net8.0\PadDatePicker.staticwebassets.runtime.json
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\bin\Debug\net8.0\PadDatePicker.deps.json
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\bin\Debug\net8.0\PadDatePicker.dll
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\bin\Debug\net8.0\PadDatePicker.pdb
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\PadDatePicker.csproj.AssemblyReference.cache
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\PadDatePicker.GeneratedMSBuildEditorConfig.editorconfig
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\PadDatePicker.AssemblyInfoInputs.cache
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\PadDatePicker.AssemblyInfo.cs
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\PadDatePicker.csproj.CoreCompileInputs.cache
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\staticwebassets.build.json
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\staticwebassets.development.json
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\staticwebassets.pack.json
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\PadDatePicker.dll
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\refint\PadDatePicker.dll
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\PadDatePicker.pdb
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\ref\PadDatePicker.dll
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\staticwebassets\msbuild.PadDatePicker.Microsoft.AspNetCore.StaticWebAssets.props
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\staticwebassets\msbuild.build.PadDatePicker.props
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.PadDatePicker.props
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PadDatePicker.props
+E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\scopedcss\bundle\PadDatePicker.styles.css

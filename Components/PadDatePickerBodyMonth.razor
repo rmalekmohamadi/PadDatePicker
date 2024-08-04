@@ -1,0 +1,15 @@
+﻿@namespace PadDatePicker
+
+@using System.Globalization
+@using System.Text
+
+<div class="@DatePicker?.Classes?.MonthsBodyGrid">
+    @for (var index = 1; index <= 12; index++)
+    {
+        <PadDatePickerMonthBtn Index="@index" />
+    }
+</div>
+
+@code {
+    [CascadingParameter(Name = "DatePicker")] public PadDatePicker? DatePicker { get; set; }
+}

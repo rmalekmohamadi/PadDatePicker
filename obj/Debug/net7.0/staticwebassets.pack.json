@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\web\\Own\\libs\\libs 030513 h\\libs\\PadDatePicker\\wwwroot\\background.png",
+      "PackagePath": "staticwebassets\\background.png"
+    },
+    {
+      "Id": "E:\\web\\Own\\libs\\libs 030513 h\\libs\\PadDatePicker\\wwwroot\\exampleJsInterop.js",
+      "PackagePath": "staticwebassets\\exampleJsInterop.js"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.PadDatePicker.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.PadDatePicker.props",
+      "PackagePath": "build\\PadDatePicker.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.PadDatePicker.props",
+      "PackagePath": "buildMultiTargeting\\PadDatePicker.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.PadDatePicker.props",
+      "PackagePath": "buildTransitive\\PadDatePicker.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
