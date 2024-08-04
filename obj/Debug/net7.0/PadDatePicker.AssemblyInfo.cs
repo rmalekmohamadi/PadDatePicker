@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCopyrightAttribute("Copyright 2024 Pad")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("multicultural DatePicker for blazor such as Persian culture.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c402e339db53f519d43452747f243640df216681")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+624014209679062bf0a324313894281d1b8dad56")]
 [assembly: System.Reflection.AssemblyProductAttribute("PadDatePicker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PadDatePicker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
