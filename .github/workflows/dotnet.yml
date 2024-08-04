@@ -13,13 +13,17 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        dotnet-version:
+          - '7.0.X'
+          - '8.0.X'
     steps:
     - uses: actions/checkout@v4
-    - name: Setup .NET
+    - name: Setup .NET ${{ matriz.dotnet.version }}
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: ${{ matriz.dotnet.version }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
