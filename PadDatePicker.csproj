@@ -10,6 +10,12 @@
 	  <Authors>reza malekmohamadi</Authors>
 	  <Company>Pad</Company>
 	  <ApplicationIcon>logo.ico</ApplicationIcon>
+    <Copyright>Copyright 2024 Pad</Copyright>
+    <PackageTags>Blazor, Tailwind, Calendar, DatePicker, Persian DatePicker, Components, Blazor Components, Blazor Library</PackageTags>
+    <Description>multicultural DatePicker for blazor such as Persian culture.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/rmalekmohamadi/PadDatePicker</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +32,13 @@
 
 <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
 	<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+</ItemGroup>
+
+<ItemGroup>
+  <PackageReference Include="MinVer" Version="5.0.0">
+    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    <PrivateAssets>all</PrivateAssets>
+  </PackageReference>
 </ItemGroup>
 
 </Project>

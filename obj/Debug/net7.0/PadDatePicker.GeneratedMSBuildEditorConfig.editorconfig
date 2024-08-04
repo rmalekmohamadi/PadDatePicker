@@ -9,55 +9,55 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows,browser
 build_property.RootNamespace = PadDatePicker
 build_property.RootNamespace = PadDatePicker
-build_property.ProjectDir = E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\
+build_property.ProjectDir = E:\web\Own\padlibs\PadDatePicker\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = E:\web\Own\libs\libs 030513 h\libs\PadDatePicker
+build_property.MSBuildProjectDirectory = E:\web\Own\padlibs\PadDatePicker
 build_property._RazorSourceGeneratorDebug = 
 
-[E:/web/Own/libs/libs 030513 h/libs/PadDatePicker/Components/PadDatePickerBody.razor]
+[E:/web/Own/padlibs/PadDatePicker/Components/PadDatePickerBody.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWREYXRlUGlja2VyQm9keS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/web/Own/libs/libs 030513 h/libs/PadDatePicker/Components/PadDatePickerBodyDay.razor]
+[E:/web/Own/padlibs/PadDatePicker/Components/PadDatePickerBodyDay.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWREYXRlUGlja2VyQm9keURheS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/web/Own/libs/libs 030513 h/libs/PadDatePicker/Components/PadDatePickerBodyMonth.razor]
+[E:/web/Own/padlibs/PadDatePicker/Components/PadDatePickerBodyMonth.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWREYXRlUGlja2VyQm9keU1vbnRoLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/web/Own/libs/libs 030513 h/libs/PadDatePicker/Components/PadDatePickerBodyYear.razor]
+[E:/web/Own/padlibs/PadDatePicker/Components/PadDatePickerBodyYear.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWREYXRlUGlja2VyQm9keVllYXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/web/Own/libs/libs 030513 h/libs/PadDatePicker/Components/PadDatePickerBtn.razor]
+[E:/web/Own/padlibs/PadDatePicker/Components/PadDatePickerBtn.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWREYXRlUGlja2VyQnRuLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/web/Own/libs/libs 030513 h/libs/PadDatePicker/Components/PadDatePickerDayBtn.razor]
+[E:/web/Own/padlibs/PadDatePicker/Components/PadDatePickerDayBtn.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWREYXRlUGlja2VyRGF5QnRuLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/web/Own/libs/libs 030513 h/libs/PadDatePicker/Components/PadDatePickerHeader.razor]
+[E:/web/Own/padlibs/PadDatePicker/Components/PadDatePickerHeader.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWREYXRlUGlja2VySGVhZGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/web/Own/libs/libs 030513 h/libs/PadDatePicker/Components/PadDatePickerMonthBtn.razor]
+[E:/web/Own/padlibs/PadDatePicker/Components/PadDatePickerMonthBtn.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWREYXRlUGlja2VyTW9udGhCdG4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/web/Own/libs/libs 030513 h/libs/PadDatePicker/Components/PadDatePickerYearBtn.razor]
+[E:/web/Own/padlibs/PadDatePicker/Components/PadDatePickerYearBtn.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWREYXRlUGlja2VyWWVhckJ0bi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/web/Own/libs/libs 030513 h/libs/PadDatePicker/PadDatePicker.razor]
+[E:/web/Own/padlibs/PadDatePicker/PadDatePicker.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFkRGF0ZVBpY2tlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/web/Own/libs/libs 030513 h/libs/PadDatePicker/_Imports.razor]
+[E:/web/Own/padlibs/PadDatePicker/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

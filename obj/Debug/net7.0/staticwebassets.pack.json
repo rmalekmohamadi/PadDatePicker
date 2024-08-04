@@ -1,11 +1,11 @@
 {
   "Files": [
     {
-      "Id": "E:\\web\\Own\\libs\\libs 030513 h\\libs\\PadDatePicker\\wwwroot\\background.png",
+      "Id": "E:\\web\\Own\\padlibs\\PadDatePicker\\wwwroot\\background.png",
       "PackagePath": "staticwebassets\\background.png"
     },
     {
-      "Id": "E:\\web\\Own\\libs\\libs 030513 h\\libs\\PadDatePicker\\wwwroot\\exampleJsInterop.js",
+      "Id": "E:\\web\\Own\\padlibs\\PadDatePicker\\wwwroot\\exampleJsInterop.js",
       "PackagePath": "staticwebassets\\exampleJsInterop.js"
     },
     {

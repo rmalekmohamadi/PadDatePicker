@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AyhkxU//hh8fsPmAnAEBWm/tXeaAs/v5XFE8OjGrDPs=",
+  "Hash": "jYXT765729lbjh51aLk0c6JRWB5WKQGImfa49bXsNxM=",
   "Source": "PadDatePicker",
   "BasePath": "_content/PadDatePicker",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "PadDatePicker\\wwwroot",
       "Source": "PadDatePicker",
-      "ContentRoot": "E:\\web\\Own\\libs\\libs 030513 h\\libs\\PadDatePicker\\wwwroot\\",
+      "ContentRoot": "E:\\web\\Own\\padlibs\\PadDatePicker\\wwwroot\\",
       "BasePath": "_content/PadDatePicker",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "E:\\web\\Own\\libs\\libs 030513 h\\libs\\PadDatePicker\\wwwroot\\background.png",
+      "Identity": "E:\\web\\Own\\padlibs\\PadDatePicker\\wwwroot\\background.png",
       "SourceId": "PadDatePicker",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\web\\Own\\libs\\libs 030513 h\\libs\\PadDatePicker\\wwwroot\\",
+      "ContentRoot": "E:\\web\\Own\\padlibs\\PadDatePicker\\wwwroot\\",
       "BasePath": "_content/PadDatePicker",
       "RelativePath": "background.png",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot\\background.png"
     },
     {
-      "Identity": "E:\\web\\Own\\libs\\libs 030513 h\\libs\\PadDatePicker\\wwwroot\\exampleJsInterop.js",
+      "Identity": "E:\\web\\Own\\padlibs\\PadDatePicker\\wwwroot\\exampleJsInterop.js",
       "SourceId": "PadDatePicker",
       "SourceType": "Discovered",
-      "ContentRoot": "E:\\web\\Own\\libs\\libs 030513 h\\libs\\PadDatePicker\\wwwroot\\",
+      "ContentRoot": "E:\\web\\Own\\padlibs\\PadDatePicker\\wwwroot\\",
       "BasePath": "_content/PadDatePicker",
       "RelativePath": "exampleJsInterop.js",
       "AssetKind": "All",

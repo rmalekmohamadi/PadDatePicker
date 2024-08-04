@@ -4,26 +4,35 @@
     <id>PadDatePicker</id>
     <version>1.0.0</version>
     <authors>reza malekmohamadi</authors>
-    <description>Package Description</description>
-    <repository type="git" />
+    <readme>README.md</readme>
+    <description>multicultural DatePicker for blazor such as Persian culture.</description>
+    <copyright>Copyright 2024 Pad</copyright>
+    <tags>Blazor, Tailwind, Calendar, DatePicker, Persian DatePicker, Components, Blazor Components, Blazor Library</tags>
+    <repository type="git" url="https://github.com/rmalekmohamadi/PadDatePicker" commit="45c1e11ac56bb999fcb2d667f0534efe2d171e4b" />
     <dependencies>
+      <group targetFramework="net7.0">
+        <dependency id="Microsoft.AspNetCore.Components.Web" version="7.0.0" exclude="Build,Analyzers" />
+      </group>
       <group targetFramework="net8.0">
-        <dependency id="Microsoft.AspNetCore.Components.Web" version="8.0.6" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.Web" version="8.0.0" exclude="Build,Analyzers" />
       </group>
     </dependencies>
     <contentFiles>
+      <files include="any/net7.0/logo.ico" buildAction="Content" />
       <files include="any/net8.0/logo.ico" buildAction="Content" />
     </contentFiles>
   </metadata>
   <files>
-    <file src="E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\bin\Debug\net8.0\PadDatePicker.dll" target="lib\net8.0\PadDatePicker.dll" />
-    <file src="E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\logo.ico" target="content\logo.ico" />
-    <file src="E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\logo.ico" target="contentFiles\any\net8.0\logo.ico" />
-    <file src="E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\wwwroot\background.png" target="staticwebassets\background.png" />
-    <file src="E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\wwwroot\exampleJsInterop.js" target="staticwebassets\exampleJsInterop.js" />
-    <file src="E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\staticwebassets\msbuild.PadDatePicker.Microsoft.AspNetCore.StaticWebAssets.props" target="build\Microsoft.AspNetCore.StaticWebAssets.props" />
-    <file src="E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\staticwebassets\msbuild.build.PadDatePicker.props" target="build\PadDatePicker.props" />
-    <file src="E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.PadDatePicker.props" target="buildMultiTargeting\PadDatePicker.props" />
-    <file src="E:\web\Own\libs\libs 030513 h\libs\PadDatePicker\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.PadDatePicker.props" target="buildTransitive\PadDatePicker.props" />
+    <file src="E:\web\Own\padlibs\PadDatePicker\bin\Debug\net7.0\PadDatePicker.dll" target="lib\net7.0\PadDatePicker.dll" />
+    <file src="E:\web\Own\padlibs\PadDatePicker\bin\Debug\net8.0\PadDatePicker.dll" target="lib\net8.0\PadDatePicker.dll" />
+    <file src="E:\web\Own\padlibs\PadDatePicker\logo.ico" target="content\logo.ico" />
+    <file src="E:\web\Own\padlibs\PadDatePicker\logo.ico" target="contentFiles\any\net7.0\logo.ico" />
+    <file src="E:\web\Own\padlibs\PadDatePicker\logo.ico" target="contentFiles\any\net8.0\logo.ico" />
+    <file src="E:\web\Own\padlibs\PadDatePicker\wwwroot\background.png" target="staticwebassets\background.png" />
+    <file src="E:\web\Own\padlibs\PadDatePicker\wwwroot\exampleJsInterop.js" target="staticwebassets\exampleJsInterop.js" />
+    <file src="E:\web\Own\padlibs\PadDatePicker\obj\Debug\net7.0\staticwebassets\msbuild.PadDatePicker.Microsoft.AspNetCore.StaticWebAssets.props" target="build\Microsoft.AspNetCore.StaticWebAssets.props" />
+    <file src="E:\web\Own\padlibs\PadDatePicker\obj\Debug\net7.0\staticwebassets\msbuild.build.PadDatePicker.props" target="build\PadDatePicker.props" />
+    <file src="E:\web\Own\padlibs\PadDatePicker\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.PadDatePicker.props" target="buildMultiTargeting\PadDatePicker.props" />
+    <file src="E:\web\Own\padlibs\PadDatePicker\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.PadDatePicker.props" target="buildTransitive\PadDatePicker.props" />
   </files>
 </package>

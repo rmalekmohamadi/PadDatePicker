@@ -192,6 +192,15 @@
           }
         }
       },
+      "MinVer/5.0.0": {
+        "type": "package",
+        "build": {
+          "build/MinVer.targets": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/MinVer.targets": {}
+        }
+      },
       "System.IO.Pipelines/7.0.0": {
         "type": "package",
         "compile": {
@@ -402,6 +411,15 @@
           "lib/net8.0/Microsoft.JSInterop.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "MinVer/5.0.0": {
+        "type": "package",
+        "build": {
+          "build/MinVer.targets": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/MinVer.targets": {}
         }
       },
       "System.IO.Pipelines/8.0.0": {
@@ -1049,6 +1067,42 @@
         "microsoft.jsinterop.nuspec"
       ]
     },
+    "MinVer/5.0.0": {
+      "sha512": "ybkgpQMtt0Fo91l5rYtE3TZtD+Nmy5Ko091xvfXXOosQdMi30XO2EZ2+ShZt89gdu7RMmJqZaJ+e1q6d+6+KNw==",
+      "type": "package",
+      "path": "minver/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "build/MinVer.targets",
+        "buildMultiTargeting/MinVer.targets",
+        "minver.5.0.0.nupkg.sha512",
+        "minver.nuspec",
+        "minver.png",
+        "minver/net6.0/McMaster.Extensions.CommandLineUtils.dll",
+        "minver/net6.0/MinVer",
+        "minver/net6.0/MinVer.Lib.dll",
+        "minver/net6.0/MinVer.deps.json",
+        "minver/net6.0/MinVer.dll",
+        "minver/net6.0/MinVer.runtimeconfig.json",
+        "minver/net6.0/NuGet.Versioning.dll",
+        "minver/net7.0/McMaster.Extensions.CommandLineUtils.dll",
+        "minver/net7.0/MinVer",
+        "minver/net7.0/MinVer.Lib.dll",
+        "minver/net7.0/MinVer.deps.json",
+        "minver/net7.0/MinVer.dll",
+        "minver/net7.0/MinVer.runtimeconfig.json",
+        "minver/net7.0/NuGet.Versioning.dll",
+        "minver/net8.0/McMaster.Extensions.CommandLineUtils.dll",
+        "minver/net8.0/MinVer",
+        "minver/net8.0/MinVer.Lib.dll",
+        "minver/net8.0/MinVer.deps.json",
+        "minver/net8.0/MinVer.dll",
+        "minver/net8.0/MinVer.runtimeconfig.json",
+        "minver/net8.0/NuGet.Versioning.dll"
+      ]
+    },
     "System.IO.Pipelines/7.0.0": {
       "sha512": "jRn6JYnNPW6xgQazROBLSfpdoczRw694vO5kKvMcNnpXuolEixUyw6IBuBs2Y2mlSX/LdLvyyWmfXhaI3ND1Yg==",
       "type": "package",
@@ -1108,10 +1162,12 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "Microsoft.AspNetCore.Components.Web >= 7.0.0"
+      "Microsoft.AspNetCore.Components.Web >= 7.0.0",
+      "MinVer >= 5.0.0"
     ],
     "net8.0": [
-      "Microsoft.AspNetCore.Components.Web >= 8.0.0"
+      "Microsoft.AspNetCore.Components.Web >= 8.0.0",
+      "MinVer >= 5.0.0"
     ]
   },
   "packageFolders": {
@@ -1121,11 +1177,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\web\\Own\\libs\\libs 030513 h\\libs\\PadDatePicker\\PadDatePicker.csproj",
+      "projectUniqueName": "E:\\web\\Own\\padlibs\\PadDatePicker\\PadDatePicker.csproj",
       "projectName": "PadDatePicker",
-      "projectPath": "E:\\web\\Own\\libs\\libs 030513 h\\libs\\PadDatePicker\\PadDatePicker.csproj",
+      "projectPath": "E:\\web\\Own\\padlibs\\PadDatePicker\\PadDatePicker.csproj",
       "packagesPath": "C:\\Users\\r.malekmohammadi.FARADIS\\.nuget\\packages\\",
-      "outputPath": "E:\\web\\Own\\libs\\libs 030513 h\\libs\\PadDatePicker\\obj\\",
+      "outputPath": "E:\\web\\Own\\padlibs\\PadDatePicker\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
@@ -1156,6 +1212,9 @@
         }
       },
       "warningProperties": {
+        "noWarn": [
+          "NU5105"
+        ],
         "warnAsError": [
           "NU1605"
         ]
@@ -1173,6 +1232,12 @@
           "Microsoft.AspNetCore.Components.Web": {
             "target": "Package",
             "version": "[7.0.0, )"
+          },
+          "MinVer": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[5.0.0, )"
           }
         },
         "imports": [
@@ -1199,6 +1264,12 @@
           "Microsoft.AspNetCore.Components.Web": {
             "target": "Package",
             "version": "[8.0.0, )"
+          },
+          "MinVer": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[5.0.0, )"
           }
         },
         "imports": [
