@@ -7,11 +7,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>Nuget.png</PackageIcon>
     <Company>Pad</Company>
     <Authors>Reza Malekmohamadi</Authors>
-    <Copyright>Copyright 2024 RPad</Copyright>
+    <Copyright>Copyright 2024 Pad</Copyright>
     <PackageTags>Blazor, Tailwind, Components, Blazor Components, Blazor Library</PackageTags>
     <Description>A Blazor Component Library based on Tailwind for DatePicker, it allows .NET developers to easily understand and debug the code when needed.</Description>
     <PackageProjectUrl>https://rpad.ir/</PackageProjectUrl>
@@ -26,6 +25,12 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" Visible="false" PackagePath="" />
+    <None Include="..\..\README.md" Pack="true" Visible="false" PackagePath="" />
+    <None Include="..\..\content\Nuget.png" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
