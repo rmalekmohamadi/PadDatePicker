@@ -1,0 +1,15 @@
+﻿@namespace PadDatePicker
+
+@using System.Globalization
+@using System.Text
+
+<div class="flex w-64 grid grid-cols-4">
+    @for (var index = 1; index <= 12; index++)
+    {
+        <PadDatePickerMonthBtn Index="@index" />
+    }
+</div>
+
+@code {
+    [CascadingParameter(Name = "DatePicker")] public PadDatePickerBase? DatePicker { get; set; }
+}

@@ -1,0 +1,51 @@
+﻿@namespace PadDatePicker
+
+@inherits PadDatePickerBase
+
+<CascadingValue Name="DatePicker" Value="this">
+    <div class="inline-block">
+        @if (HeaderTemplate != null)
+        {
+            @HeaderTemplate
+        }
+        <div>
+            @if (ShowLabelOnHeader)
+            {
+                <div class="@Classes?.PickerHeaderLabel">
+                    @Label
+                </div>
+            }
+            <PadDatePickerHeader />
+        </div>
+        <div class="p-1">
+            <PadDatePickerBody />
+        </div>
+        @if (_bodyViewType.Equals(PadDatePickerViewType.Day) && (ShowToDayButton || ShowClearButton))
+        {
+            <div>
+                <div class="@Classes?.FooterWrapper">
+                    @if (ShowToDayButton)
+                    {
+                        <button @onclick="GoToToday"
+                                type="button"
+                                class="@Classes?.GoToTodayButton">
+                            @ToDayButtonText
+                        </button>
+                    }
+                    @if (ShowClearButton)
+                    {
+                        <button @onclick="ClearButtonClick"
+                                type="button"
+                                class="@Classes?.ClearButton">
+                            @ClearButtonText
+                        </button>
+                    }
+                </div>
+            </div>
+        }
+        @if (FooterTemplate != null)
+        {
+            @FooterTemplate
+        }
+    </div>
+</CascadingValue>

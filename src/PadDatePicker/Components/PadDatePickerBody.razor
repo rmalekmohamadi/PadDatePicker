@@ -1,0 +1,27 @@
+﻿@namespace PadDatePicker
+
+@using System.Globalization
+@using System.Text
+
+<div class="@DatePicker?.Classes?.BodyWrapper">
+    <div>
+        @if (_body != null)
+        {
+            <DynamicComponent Type="@_body" />
+        }
+    </div>
+</div>
+
+@code {
+    [CascadingParameter(Name = "DatePicker")] public PadDatePicker? DatePicker { get; set; }
+
+    private Type _body;
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (DatePicker?.GetBodyView != null)
+        {
+            _body = Type.GetType($"PadDatePicker.PadDatePickerBody{DatePicker.GetBodyView}");
+        }
+    }
+}

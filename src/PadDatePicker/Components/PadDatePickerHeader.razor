@@ -1,0 +1,52 @@
+﻿@namespace PadDatePicker
+
+@if(DatePicker?.GetHeaderVisibility ?? false)
+{
+    <div class="@DatePicker?.Classes?.PickerHeader">
+        <button type="button"
+                class="@DatePicker?.Classes?.PrevNavButton"
+                @onclick="@((e) => HandleChange(false))">
+            <svg class="@DatePicker?.Classes?.PrevNavIcon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"></path>
+            </svg>
+        </button>
+        @if (!string.IsNullOrEmpty(DatePicker.GetHeaderTitle()))
+        {
+            <button type="button"
+                    class="@DatePicker?.Classes?.HeaderButton"
+                    @onclick="@((e) => DatePicker.HandleClickHeader())">
+                @DatePicker.GetHeaderTitle()
+            </button>
+        }
+        <button type="button"
+                class="@DatePicker?.Classes?.NextNavButton"
+                @onclick="@((e) => HandleChange(true))">
+            <svg class="@DatePicker?.Classes?.NextNavIcon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"></path>
+            </svg>
+        </button>
+    </div>
+}
+
+@code {
+    [CascadingParameter(Name = "DatePicker")] public PadDatePickerBase? DatePicker { get; set; }
+
+    private bool prevDisabled => DatePicker.GetHeaderView.Equals(PadDatePickerViewType.Month) ? DatePicker.CanChangeMonth(false) is false : DatePicker.CanChangeYear(false) is false;
+    private bool nextDisabled => DatePicker.GetHeaderView.Equals(PadDatePickerViewType.Month) ? DatePicker.CanChangeMonth(true) is false : DatePicker.CanChangeYear(true) is false;
+
+    private void HandleChange(bool isNext)
+    {
+        if (DatePicker.GetHeaderView.Equals(PadDatePickerViewType.Month))
+        {
+            DatePicker.HandleMonthChange(isNext);
+        }
+        else if (DatePicker.GetHeaderView.Equals(PadDatePickerViewType.Year))
+        {
+            DatePicker.HandleYearChange(isNext);
+        }
+        else
+        {
+            DatePicker.HandleYearRangeChange(isNext);
+        }
+    }
+}

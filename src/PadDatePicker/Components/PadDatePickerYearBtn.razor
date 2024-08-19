@@ -1,0 +1,19 @@
+﻿@namespace PadDatePicker
+
+<PadDatePickerBtn IsEnable="@(!DatePicker.IsYearOutOfMinAndMaxDate(Index))" IsCurrent="@DatePicker.IsToYear(_year)" IsSelected="@DatePicker.IsSelectedYear(_year)" OnClick="@((e) => DatePicker.SelectYear(_year))">
+    @if (DatePicker.YearCellTemplate is not null)
+    {
+        @DatePicker.YearCellTemplate(_year)
+    }
+    else
+    {
+        @(_year)
+    }
+</PadDatePickerBtn>
+
+@code {
+    [CascadingParameter(Name = "DatePicker")] public PadDatePickerBase? DatePicker { get; set; }
+    [Parameter] public int Index { get; set; }
+
+    private int _year => DatePicker.GetYearPickerStartYear + Index;
+}

@@ -1,0 +1,16 @@
+﻿@namespace PadDatePicker
+
+<span class="@_cls" @onclick="@(async (e) => await OnClick.InvokeAsync(e))">
+    @ChildContent
+</span>
+
+@code {
+    [CascadingParameter(Name = "DatePicker")] public PadDatePickerBase? DatePicker { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public bool IsEnable { get; set; }
+    [Parameter] public bool IsCurrent { get; set; }
+    [Parameter] public bool IsSelected { get; set; }
+    [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+    string _cls => DatePicker.GetDayButtonCss(IsEnable, IsCurrent, IsSelected);
+}

@@ -1,0 +1,20 @@
+﻿@namespace PadDatePicker
+
+<PadDatePickerBtn IsEnable="@(!IsDisabled(Week, Day))" IsCurrent="@DatePicker.IsToDay(Week, Day)" IsSelected="@DatePicker.IsSelectedDay(Week, Day)" OnClick="@((e) => DatePicker.SelectDate(Day, Week))">
+    @if (DatePicker.DayCellTemplate is not null)
+    {
+        @DatePicker.DayCellTemplate(DatePicker.GetDateTimeOfDayCell(Day, Week))
+    }
+    else
+    {
+        @DatePicker.DaysOfCurrentMonth(Week, Day)
+    }
+</PadDatePickerBtn>
+
+@code {
+    [CascadingParameter(Name = "DatePicker")] public PadDatePickerBase? DatePicker { get; set; }
+    [Parameter] public int Day { get; set; }
+    [Parameter] public int Week { get; set; }
+
+    bool IsDisabled(int week, int day) => DatePicker.IsWeekDayOutOfMinAndMaxDate(day, week) || !DatePicker.IsInCurrentMonth(week, day);
+}

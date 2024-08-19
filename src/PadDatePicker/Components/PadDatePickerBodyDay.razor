@@ -1,0 +1,27 @@
+﻿@namespace PadDatePicker
+
+@using System.Globalization
+@using System.Text
+
+<div class="grid grid-cols-7 @DatePicker.Classes?.DaysHeaderRow">
+    @for (var index = 0; index < 7; index++)
+    {
+        var dayOfWeekName = DatePicker.Culture.DateTimeFormat.GetShortestDayName(DatePicker.GetDayOfWeek(index));
+        <span class="@DatePicker.Classes?.DaysHeaderButton">@dayOfWeekName[0]</span>
+    }
+</div>
+<div class="w-64 grid grid-cols-7 @DatePicker.Classes?.DaysRow">
+    @for (var week = 0; week < 6; week++)
+    {
+        if (DatePicker.DaysOfCurrentMonth(week, 0) == 0 || (week == 0 && DatePicker.DaysOfCurrentMonth(week, 6) > 20)) continue;
+
+        @for (var day = 0; day < 7; day++)
+        {
+           <PadDatePickerDayBtn Day="@day" Week="@week" />
+        }
+    }
+</div>
+
+@code {
+    [CascadingParameter(Name = "DatePicker")] public PadDatePickerBase? DatePicker { get; set; }
+}

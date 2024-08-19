@@ -1,0 +1,17 @@
+﻿@namespace PadDatePicker
+
+<PadDatePickerBtn IsEnable="@(!DatePicker.IsMonthOutOfMinAndMaxDate(Index))" IsCurrent="@DatePicker.IsToMonth(Index)" IsSelected="@DatePicker.IsSelectedMonth(Index)" OnClick="@((e) => DatePicker.SelectMonth(Index))">
+    @if (DatePicker.MonthCellTemplate is not null)
+    {
+        @DatePicker.MonthCellTemplate(DatePicker.GetDateTimeOfMonthCell(Index))
+    }
+    else
+    {
+        @DatePicker.Culture.DateTimeFormat.GetAbbreviatedMonthName(Index)
+    }
+</PadDatePickerBtn>
+
+@code {
+    [CascadingParameter(Name = "DatePicker")] public PadDatePickerBase? DatePicker { get; set; }
+    [Parameter] public int Index { get; set; }
+}
