@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="content/Nuget.png">
     <source media="(prefers-color-scheme: light)" srcset="content/Nuget.png">
-    <img alt="MudBlazor" src="content/Nuget.png">
+    <img alt="PadDatePicker" src="content/Nuget.png">
   </picture>
 </h1>
 
