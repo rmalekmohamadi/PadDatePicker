@@ -479,7 +479,7 @@ namespace PadDatePicker
         {
             _dateTimeManager.SelectedYear = Culture.Calendar.GetYear(dateTime);
             _dateTimeManager.SelectedMonth = Culture.Calendar.GetMonth(dateTime);
-            //_dateTimeManager.SelectedDay = Culture.Calendar.GetDayOfMonth(dateTime);
+            _dateTimeManager.SelectedDay = Culture.Calendar.GetDayOfMonth(dateTime);
 
             _yearPickerStartYear = _dateTimeManager.SelectedYear - 1;
             _yearPickerEndYear = _dateTimeManager.SelectedYear + 10;
