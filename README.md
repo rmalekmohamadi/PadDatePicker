@@ -11,7 +11,6 @@ Tailwind DatePicker components for Blazor
 
 
 
-
 ## Installation
 
 Install Package
@@ -24,3 +23,22 @@ dotnet add package PadDatePicker
 - Pick Range of DateTime
 - Different Culture such as Persian Culture
 
+## Usage
+```
+<PadDatePicker.PadDatePickerDialog HighlightCurrent ShowOkButton ShowClearButton ShowToDayButton ShowLabelOnHeader Classes="@classStyles" @bind-Value="_value" Label="Please Choose Date" />
+
+<PadDatePicker.PadDateRangePicker HighlightCurrent ShowOkButton ShowClearButton ShowToDayButton ShowLabelOnHeader @bind-Value="_valueRange" />
+
+@code
+{
+    private DateTimeOffset? _value;
+    private PadDateTimeRange _valueRange;
+    private DatePickerClassStyles classStyles = new DatePickerClassStyles();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        classStyles.NormalDayButton = "bg-green-500";
+    }
+}
+```
