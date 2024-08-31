@@ -266,7 +266,11 @@ namespace PadDatePicker
                     var startDateMonth = Culture.Calendar.GetMonth(startRange.Value.DateTime);
                     var startDateDay = Culture.Calendar.GetDayOfMonth(startRange.Value.DateTime);
 
-                    if (SelectedYear >= startDateYear && SelectedMonth >= startDateMonth && day >= startDateDay) startIsInRange = true;
+                    if (
+                           SelectedYear > startDateYear ||
+                           (SelectedYear == startDateYear && month > startDateMonth) ||
+                           (SelectedYear == startDateYear && month == startDateMonth && day > startDateDay)
+                           ) startIsInRange = true;
                 }
                 if (startIsInRange)
                 {
@@ -276,7 +280,11 @@ namespace PadDatePicker
                         var endDateMonth = Culture.Calendar.GetMonth(endRange.Value.DateTime);
                         var endDateDay = Culture.Calendar.GetDayOfMonth(endRange.Value.DateTime);
 
-                        if (SelectedYear <= endDateYear && month <= endDateMonth && day <= endDateDay) return true;
+                        if (
+                            SelectedYear < endDateYear || 
+                            (SelectedYear == endDateYear && month < endDateMonth) ||
+                            (SelectedYear == endDateYear && month == endDateMonth && day < endDateDay)
+                            ) return true;
                     }
                     else return false;
                 }
