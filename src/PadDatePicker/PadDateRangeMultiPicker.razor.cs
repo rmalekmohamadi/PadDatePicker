@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Metrics;
 using System.Globalization;
 
 namespace PadDatePicker
 {
-    public partial class PadDateRangePickerDialog : PadComponentBase
+    public partial class PadDateRangeMultiPicker : PadComponentBase
     {
         #region PadDatePickerBase Parameters
+        [Parameter] public string Id { get; set; }
         /// <summary>
         /// Custom CSS classes for different parts of the DatePicker component.
         /// </summary>
@@ -143,53 +144,6 @@ namespace PadDatePicker
         [Parameter] public string? InvalidErrorMessage { get; set; }
 
         /// <summary>
-        /// Whether the current item should be button for close.
-        /// </summary>
-        [Parameter] public bool ShowCloseButton { get; set; }
-        /// <summary>
-        /// Custom template for the DatePicker's icon.
-        /// </summary>
-        [Parameter] public RenderFragment? IconTemplate { get; set; }
-
-        /// <summary>
-        /// Determines the location of the DatePicker's icon.
-        /// </summary>
-        [Parameter]
-        public Side IconSide { get; set; }
-
-        // [Parameter] public PSize Size { get; set; } = PSize.Base;
-        /// <summary>
-        /// Whether or not the DatePicker allows a string date input.
-        /// </summary>
-        [Parameter] public bool AllowTextInput { get; set; } = true;
-
-        /// <summary>
-        /// Custom label for the start DatePicker.
-        /// </summary>
-        [Parameter] public string StartRangeLabel { get; set; }
-
-        /// <summary>
-        /// Custom label for the start DatePicker.
-        /// </summary>
-        [Parameter] public string EndRangeLabel { get; set; }
-
-        /// <summary>
-        /// Whether or not the component is disabled.
-        /// </summary>
-        [Parameter]
-        public bool IsDisabled
-        {
-            get => isDisabled;
-            set
-            {
-                if (isDisabled == value) return;
-
-                isDisabled = value;
-            }
-        }
-        protected bool isDisabled;
-
-        /// <summary>
         /// Gets or sets the value of the input. This should be used with two-way binding.
         /// </summary>
         /// <example>
@@ -236,17 +190,6 @@ namespace PadDatePicker
         /// Gets or sets a callback that updates the bound value.
         /// </summary>
         [Parameter] public EventCallback<PadDateTimeRange> ValueChanged { get; set; }
-
-        /// <summary>
-        /// Gets or sets an expression that identifies the bound value.
-        /// </summary>
-        // [Parameter] public Expression<Func<PadDateTimeRange>>? ValueExpression { get; set; }
-
-        /// <summary>
-        /// The placeholder text of the DatePicker's input.
-        /// </summary>
-        [Parameter] public string StartPlaceholder { get; set; } = string.Empty;
-        [Parameter] public string EndPlaceholder { get; set; } = string.Empty;
 
         protected string? StartCurrentValueAsString
         {
@@ -320,22 +263,6 @@ namespace PadDatePicker
 
         private bool _isVisible = false;
 
-        private ElementReference _startInputRef = default!;
-        private ElementReference _endInputRef = default!;
-
-        private void Open() => _isVisible = true;
-        private void Close() => _isVisible = false;
-        private void Toggle() => _isVisible = !_isVisible;
-
-        private async Task HandleOnOkClicked()
-        {
-            if (_isVisible is false) return;
-            Close();
-
-            if (OnOkButtonClicked.HasDelegate)
-                await OnOkButtonClicked.InvokeAsync();
-        }
-
         private async Task HandleOnClearClicked()
         {
             if (_isVisible is false) return;
@@ -355,51 +282,34 @@ namespace PadDatePicker
                 await OnToDayButtonClicked.InvokeAsync();
         }
 
-        private void HandleOnStartChange(ChangeEventArgs args)
+
+        //protected override void OnAfterRender(bool firstRender)
+        //{
+        //    base.OnAfterRender(firstRender);
+        //    SelectedStartChanged(DateTimeOffset.Now);
+        //}
+        private bool _startInit = false;
+        private DateTimeOffset? _selectedStart;
+        private void SelectedStartInitialized(DateTimeOffset? selected)
         {
-            if (_isVisible is false) return;
-            if (AllowTextInput is false) return;
-
-            StartCurrentValueAsString = args.Value?.ToString();
-        }
-
-        private void HandleOnEndChange(ChangeEventArgs args)
-        {
-            if (_isVisible is false) return;
-            if (AllowTextInput is false) return;
-
-            StartCurrentValueAsString = args.Value?.ToString();
-        }
-
-        private void HandleOnStartFocus(FocusEventArgs args)
-        {
-            _isVisible = true;
-        }
-
-        private void HandleOnEndFocus(FocusEventArgs args)
-        {
-            _isVisible = true;
-        }
-
-        private void HandleOnStartFocusOut(FocusEventArgs args)
-        {
-
-        }
-
-        private void HandleOnEndFocusOut(FocusEventArgs args)
-        {
-
-        }
-
-        private Dictionary<string, object> SetAttributes()
-        {
-            var attributes = new Dictionary<string, object>();
-
-            if (!AllowTextInput)
+            Console.WriteLine("Initialized {0}", selected);
+            if(!_startInit)
             {
-                attributes.Add("readonly", "readonly");
+                _startInit = true;
+                SelectedStartChanged(selected);
             }
-            return attributes;
+        }
+        private void SelectedStartChanged(DateTimeOffset? selected)
+        {
+            _selectedStart = selected;
+            _selectedEnd = selected.Value.AddMonths(1);
+        }
+        private DateTimeOffset? _selectedEnd;
+        private void SelectedEndChanged(DateTimeOffset? selected)
+        {
+
+            _selectedEnd = selected;
+            _selectedStart = selected.Value.AddMonths(-1);
         }
     }
 }

@@ -1,0 +1,68 @@
+﻿@namespace PadDatePicker
+
+@inherits PadComponentBase
+
+@if (ShowLabelOnHeader)
+{
+    <div class="@Classes?.PickerHeaderLabel">
+        @Label
+    </div>
+}
+<div class="flex">
+    <PadDatePicker Classes="@Classes" Id="id-1"
+                    Culture="@Culture"
+                    TimeFormat="@TimeFormat"
+                    HeaderTemplate="@HeaderTemplate"
+                    FooterTemplate="@FooterTemplate"
+                    DayCellTemplate="@DayCellTemplate"
+                    MonthCellTemplate="@MonthCellTemplate"
+                    YearCellTemplate="@YearCellTemplate"
+                    MinDate="@MinDate"
+                    MaxDate="@(new[] { MaxDate,_end }.Max())"
+                    ShowOkButton="false"
+                    ShowClearButton="false"
+                    ShowToDayButton="false"
+                    HighlightCurrent="@HighlightCurrent"
+                    HourStep="@HourStep"
+                    MinuteStep="@MinuteStep"
+                    Label="@Label"
+                    ShowLabelOnHeader="false"
+                    StartHighlightDay="@_start"
+                    EndHighlightDay="@_end"
+                    Selected="@_selectedStart"
+                    SelectedChanged="SelectedStartInitialized"
+                    OnMonthChanged="SelectedStartChanged"
+                    OnYearChanged="SelectedStartChanged"
+                    @bind-Value="_start" />
+
+    <PadDatePicker Classes="@Classes" Id="id-2"
+                    Culture="@Culture"
+                    TimeFormat="@TimeFormat"
+                    HeaderTemplate="@HeaderTemplate"
+                    FooterTemplate="@FooterTemplate"
+                    DayCellTemplate="@DayCellTemplate"
+                    MonthCellTemplate="@MonthCellTemplate"
+                    YearCellTemplate="@YearCellTemplate"
+                    MinDate="@(new[] { MinDate,_start }.Min())"
+                    MaxDate="@MaxDate"
+                    OnOkButtonClicked="@OnOkButtonClicked"
+                    ShowOkButton="@ShowOkButton"
+                    OkButtonText="@OkButtonText"
+                    OnClearButtonClicked="@HandleOnClearClicked"
+                    ShowClearButton="@ShowClearButton"
+                    ClearButtonText="@ClearButtonText"
+                    ShowToDayButton="@ShowToDayButton"
+                    OnToDayButtonClicked="@HandleOnToDayClicked"
+                    ToDayButtonText="@ToDayButtonText"
+                    HighlightCurrent="@HighlightCurrent"
+                    HourStep="@HourStep"
+                    MinuteStep="@MinuteStep"
+                    Label="@Label"
+                    ShowLabelOnHeader="false"
+                    StartHighlightDay="@_start"
+                    EndHighlightDay="@_end"
+                    Selected="@_selectedEnd"
+                    OnMonthChanged="SelectedEndChanged"
+                    OnYearChanged="SelectedEndChanged"
+                    @bind-Value="_end" />
+</div>

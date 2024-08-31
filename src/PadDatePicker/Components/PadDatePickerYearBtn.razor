@@ -1,4 +1,5 @@
 ﻿@namespace PadDatePicker
+@using global::PadDatePicker.Tools
 
 <PadDatePickerBtn IsEnable="@(!DatePicker.IsYearOutOfMinAndMaxDate(Index))" IsCurrent="@DatePicker.IsToYear(_year)" IsSelected="@DatePicker.IsSelectedYear(_year)" OnClick="@((e) => DatePicker.SelectYear(_year))">
     @if (DatePicker.YearCellTemplate is not null)

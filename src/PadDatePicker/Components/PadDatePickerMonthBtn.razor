@@ -1,4 +1,5 @@
 ﻿@namespace PadDatePicker
+@using global::PadDatePicker.Tools
 
 <PadDatePickerBtn IsEnable="@(!DatePicker.IsMonthOutOfMinAndMaxDate(Index))" IsCurrent="@DatePicker.IsToMonth(Index)" IsSelected="@DatePicker.IsSelectedMonth(Index)" OnClick="@((e) => DatePicker.SelectMonth(Index))">
     @if (DatePicker.MonthCellTemplate is not null)

@@ -101,12 +101,17 @@ public class DatePickerClassStyles
     /// <summary>
     /// Custom CSS classes/styles for the Go to today button of the DatePicker.
     /// </summary>
-    public string? GoToTodayButton { get; set; } = "button today-btn text-white bg-blue-700 !bg-primary-700 dark:bg-blue-600 dark:!bg-primary-600 hover:bg-blue-800 hover:!bg-primary-800 dark:hover:bg-blue-700 dark:hover:!bg-primary-700 focus:ring-4 focus:ring-blue-300 focus:!ring-primary-300 font-medium rounded-lg text-xs px-5 py-2 text-center w-1/2";
+    public string? GoToTodayButton { get; set; } = "button text-white bg-blue-700 !bg-primary-700 dark:bg-blue-600 dark:!bg-primary-600 hover:bg-blue-800 hover:!bg-primary-800 dark:hover:bg-blue-700 dark:hover:!bg-primary-700 focus:ring-4 focus:ring-blue-300 focus:!ring-primary-300 font-medium rounded-lg text-xs px-5 py-2 text-center w-1/2";
 
     /// <summary>
     /// Custom CSS classes/styles for the Clear button of the DatePicker.
     /// </summary>
-    public string? ClearButton { get; set; } = "button clear-btn text-gray-900 dark:text-white bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 focus:ring-4 focus:ring-blue-300 focus:!ring-primary-300 font-medium rounded-lg text-xs px-5 py-2 text-center w-1/2";
+    public string? ClearButton { get; set; } = "button text-gray-900 dark:text-white bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 focus:ring-4 focus:ring-blue-300 focus:!ring-primary-300 font-medium rounded-lg text-xs px-5 py-2 text-center w-1/2";
+
+    /// <summary>
+    /// Custom CSS classes/styles for the Ok button of the DatePicker.
+    /// </summary>
+    public string? OkButton { get; set; } = "button text-white bg-blue-700 !bg-primary-700 dark:bg-blue-600 dark:!bg-primary-600 hover:bg-blue-800 hover:!bg-primary-800 dark:hover:bg-blue-700 dark:hover:!bg-primary-700 focus:ring-4 focus:ring-blue-300 focus:!ring-primary-300 font-medium rounded-lg text-xs px-5 py-2 text-center w-1/2";
 
     /// <summary>
     /// Custom CSS classes/styles for the close button of the DatePicker.
@@ -171,7 +176,7 @@ public class DatePickerClassStyles
     /// <summary>
     /// Custom CSS classes/styles for in range day button of the DatePicker.
     /// </summary>
-    public string? InRangeDayButton { get; set; }
+    public string? InRangeDayButton { get; set; } = "bg-gray-100";
 
     /// <summary>
     /// Custom CSS classes/styles for the time-picker's input container of the DatePicker.

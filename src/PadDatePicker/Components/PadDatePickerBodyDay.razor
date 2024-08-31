@@ -2,6 +2,7 @@
 
 @using System.Globalization
 @using System.Text
+@using global::PadDatePicker.Tools
 
 <div class="grid grid-cols-7 @DatePicker.Classes?.DaysHeaderRow">
     @for (var index = 0; index < 7; index++)
@@ -24,4 +25,6 @@
 
 @code {
     [CascadingParameter(Name = "DatePicker")] public PadDatePickerBase? DatePicker { get; set; }
+    // [CascadingParameter(Name = "DateTimeManager")] public DateTimeManager? DateTimeManager { get; set; }
+    // [CascadingParameter(Name = "Classes")] public DatePickerClassStyles? Classes { get; set; }
 }

@@ -17,7 +17,17 @@ namespace PadDatePicker
         /// CultureInfo for the DatePicker.
         /// </summary>
         [Parameter]
-        public CultureInfo Culture { get; set; }
+        public CultureInfo Culture
+        {
+            get => culture;
+            set
+            {
+                if (value == null || culture == value) return;
+
+                culture = value;
+            }
+        }
+        private CultureInfo culture = CultureInfo.CurrentUICulture ?? new CultureInfo("en-US");
 
         /// <summary>
         /// The time format of the time-picker, 24H or 12H.
@@ -102,6 +112,11 @@ namespace PadDatePicker
         /// The text of the DatePicker's label.
         /// </summary>
         [Parameter] public string? Label { get; set; }
+        
+        /// <summary>
+        /// Whether the show label on header.
+        /// </summary>
+        [Parameter] public bool ShowLabelOnHeader { get; set; }
         #endregion
 
         /// <summary>
@@ -115,14 +130,13 @@ namespace PadDatePicker
         [Parameter] public string? InvalidErrorMessage { get; set; }
 
         /// <summary>
-        /// Custom template for the DatePicker's icon.
-        /// </summary>
-        [Parameter] public RenderFragment? IconTemplate { get; set; }
-
-        /// <summary>
         /// Whether the current item should be button for close.
         /// </summary>
         [Parameter] public bool ShowCloseButton { get; set; }
+        /// <summary>
+        /// Custom template for the DatePicker's icon.
+        /// </summary>
+        [Parameter] public RenderFragment? IconTemplate { get; set; }
 
         /// <summary>
         /// Determines the location of the DatePicker's icon.
@@ -135,6 +149,18 @@ namespace PadDatePicker
         /// Whether or not the DatePicker allows a string date input.
         /// </summary>
         [Parameter] public bool AllowTextInput { get; set; } = true;
+
+        [Parameter] public EventCallback OnOkButtonClicked { get; set; }
+
+        /// <summary>
+        /// Whether the ok button should be shown or not when the DatePicker has a value.
+        /// </summary>
+        [Parameter] public bool ShowOkButton { get; set; }
+
+        /// <summary>
+        /// Text of ok button.
+        /// </summary>
+        [Parameter] public string OkButtonText { get; set; } = "Ok";
 
         protected override string? FormatValueAsString(DateTimeOffset? value)
         {
@@ -172,6 +198,15 @@ namespace PadDatePicker
         private void Open() => _isVisible = true;
         private void Close() => _isVisible = false;
         private void Toggle() => _isVisible = !_isVisible;
+
+        private async Task HandleOnOkClicked()
+        {
+            if (_isVisible is false) return;
+            Close();
+
+            if (OnOkButtonClicked.HasDelegate)
+                await OnOkButtonClicked.InvokeAsync();
+        }
 
         private void HandleOnChange(ChangeEventArgs args)
         {

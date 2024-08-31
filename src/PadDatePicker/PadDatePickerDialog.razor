@@ -80,6 +80,9 @@
                                YearCellTemplate="@YearCellTemplate"
                                MaxDate="@MaxDate"
                                MinDate="@MinDate"
+                               OnOkButtonClicked="@HandleOnOkClicked"
+                               ShowOkButton="@ShowOkButton"
+                               OkButtonText="@OkButtonText"
                                OnClearButtonClicked="@OnClearButtonClicked"
                                ShowClearButton="@ShowClearButton"
                                ClearButtonText="@ClearButtonText"
@@ -90,6 +93,7 @@
                                HourStep="@HourStep"
                                MinuteStep="@MinuteStep"
                                Label="@Label"
+                               ShowLabelOnHeader="@ShowLabelOnHeader"
                                @bind-Value="Value"
                                />
             </div>

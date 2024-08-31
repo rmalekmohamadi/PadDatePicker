@@ -1,6 +1,9 @@
 ﻿@namespace PadDatePicker
+@using global::PadDatePicker.Tools
 
-<span class="@_cls" @onclick="@(async (e) => await OnClick.InvokeAsync(e))">
+<span class="@_cls" @onclick="@(async (e) => await OnClick.InvokeAsync(e))"
+      @onmouseover="OnOver"
+      @onmouseleave="OnLeave">
     @ChildContent
 </span>
 
@@ -10,7 +13,15 @@
     [Parameter] public bool IsEnable { get; set; }
     [Parameter] public bool IsCurrent { get; set; }
     [Parameter] public bool IsSelected { get; set; }
+    [Parameter] public bool IsInRange { get; set; }
     [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+    [Parameter] public string Class { get; set; }
+    [Parameter] public EventCallback OnMouseOver { get; set; }
+    [Parameter] public EventCallback OnMouseLeave { get; set; }
 
-    string _cls => DatePicker.GetDayButtonCss(IsEnable, IsCurrent, IsSelected);
+    string _cls => Class + " " + DatePicker?.GetDayButtonCss(IsEnable, IsCurrent, IsSelected, IsInRange);
+
+    private async Task OnOver(MouseEventArgs args) => await OnMouseOver.InvokeAsync();
+
+    private async Task OnLeave(MouseEventArgs args) => await OnMouseLeave.InvokeAsync();
 }

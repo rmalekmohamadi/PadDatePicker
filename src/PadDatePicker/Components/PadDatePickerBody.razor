@@ -2,6 +2,7 @@
 
 @using System.Globalization
 @using System.Text
+@using global::PadDatePicker.Tools
 
 <div class="@DatePicker?.Classes?.BodyWrapper">
     <div>
@@ -13,7 +14,7 @@
 </div>
 
 @code {
-    [CascadingParameter(Name = "DatePicker")] public PadDatePicker? DatePicker { get; set; }
+    [CascadingParameter(Name = "DatePicker")] public PadDatePickerBase? DatePicker { get; set; }
 
     private Type _body;
     protected override void OnParametersSet()

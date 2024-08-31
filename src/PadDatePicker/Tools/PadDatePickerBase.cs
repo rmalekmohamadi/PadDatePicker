@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Globalization;
 
-namespace PadDatePicker
+namespace PadDatePicker.Tools
 {
-    public class PadDatePickerBase : PadComponentBase//PInputBase<DateTimeOffset?>
+    public abstract class PadDatePickerBase : PadComponentBase//PInputBase<DateTimeOffset?>
     {
+        [Parameter] public string Id { get; set; }
         /// <summary>
         /// Custom CSS classes for different parts of the DatePicker component.
         /// </summary>
@@ -19,12 +20,12 @@ namespace PadDatePicker
             get => culture;
             set
             {
-                if (culture == value) return;
+                if (value == null || culture == value) return;
 
                 culture = value;
             }
         }
-        private CultureInfo culture = CultureInfo.CurrentUICulture;
+        private CultureInfo culture = CultureInfo.CurrentUICulture ?? new CultureInfo("en-US");
 
         /// <summary>
         /// The time format of the time-picker, 24H or 12H.
@@ -56,15 +57,29 @@ namespace PadDatePicker
         /// </summary>
         [Parameter] public RenderFragment<int>? YearCellTemplate { get; set; }
 
+
+        protected DateTimeOffset? DynamicMaxDate;
+        private DateTimeOffset? _maxDate;
         /// <summary>
         /// The maximum date allowed for the DatePicker.
         /// </summary>
-        [Parameter] public DateTimeOffset? MaxDate { get; set; }
+        [Parameter] public DateTimeOffset? MaxDate
+        {
+            get => _maxDate > DynamicMaxDate ? _maxDate : DynamicMaxDate;
+            set => _maxDate = value;
+        }
 
+
+        protected DateTimeOffset? DynamicMinDate;
+        private DateTimeOffset? _minDate;
         /// <summary>
         /// The minimum date allowed for the DatePicker.
         /// </summary>
-        [Parameter] public DateTimeOffset? MinDate { get; set; }
+        [Parameter] public DateTimeOffset? MinDate
+        {
+            get => _minDate < DynamicMinDate ? _minDate : DynamicMinDate;
+            set => _minDate = value;
+        }
 
         [Parameter] public EventCallback OnClearButtonClicked { get; set; }
 
@@ -77,6 +92,18 @@ namespace PadDatePicker
         /// Text of clear button.
         /// </summary>
         [Parameter] public string ClearButtonText { get; set; } = "Clear";
+
+        [Parameter] public EventCallback OnOkButtonClicked { get; set; }
+
+        /// <summary>
+        /// Whether the ok button should be shown or not when the DatePicker has a value.
+        /// </summary>
+        [Parameter] public bool ShowOkButton { get; set; }
+
+        /// <summary>
+        /// Text of ok button.
+        /// </summary>
+        [Parameter] public string OkButtonText { get; set; } = "Ok";
 
         /// <summary>
         /// Whether the go today button should be shown or not when the.
@@ -115,96 +142,60 @@ namespace PadDatePicker
         /// </summary>
         [Parameter] public bool ShowLabelOnHeader { get; set; }
 
-        private DateTimeOffset? _value;
-        /// <summary>
-        /// Gets or sets the value of the input. This should be used with two-way binding.
-        /// </summary>
-        /// <example>
-        /// @bind-Value="model.PropertyName"
-        /// </example>
+        protected DateTimeOffset? StartHighlightDay;
+        private DateTimeOffset? _endHighlightDay;
+        protected DateTimeOffset? EndHighlightDay
+        {
+            get => _endHighlightDay != null ? _endHighlightDay  : HoverDay;
+            set => _endHighlightDay = value;
+        }
+        protected DateTimeOffset? HoverDay;
+
+
+        private DateTimeOffset? _selected;
         [Parameter]
-        public DateTimeOffset? Value 
-        { 
-            get => _value; 
-            set {
-                if(_value != value)
+        public DateTimeOffset? Selected
+        {
+            get => _selected;
+            set
+            {
+                if (_selected != value)
                 {
-                    _value = value;
-                    ValueChanged.InvokeAsync(_value);
+                    if (_selected.HasValue && value.HasValue)
+                    {
+                        if (_selected.Value.Year != value.Value.Year || _selected.Value.Month != value.Value.Month)
+                        {
+                            _selected = value;
+                            if (_selected.HasValue)
+                            {
+                                //GenerateCalendarData(_selected.Value.DateTime);
+                            }
+                            SelectedChanged.InvokeAsync(_selected);
+                        }
+                    }
+                    else
+                    {
+                        _selected = value;
+                        SelectedChanged.InvokeAsync(_selected);
+                    }
                 }
-            } 
+            }
         }
 
-        /// <summary>
-        /// Gets or sets a callback that updates the bound value.
-        /// </summary>
-        [Parameter] public EventCallback<DateTimeOffset?> ValueChanged { get; set; }
+        [Parameter] public EventCallback<DateTimeOffset?> SelectedChanged { get; set; }
 
-        //protected override void BuildRenderTree(RenderTreeBuilder builder)
-        //{
-        //    builder.OpenComponent<CascadingValue<PadDatePicker>>(1);
-        //        builder.AddAttribute(2, "Name", "DatePicker");
-        //        builder.AddAttribute(3, "Value", this);
-        //            builder.OpenElement(4, "div");
-        //            builder.AddAttribute(5, "class", Classes?.PickerContainer);
-        //            if(HeaderTemplate != null)
-        //            {
-        //                builder.AddContent(6, HeaderTemplate);
-        //            }
-        //            builder.OpenElement(7, "div");
-        //                builder.OpenElement(8, "div");
-        //                builder.AddAttribute(9, Classes?.PickerHeaderLabel);
-        //                builder.AddContent(10, Label);
-        //                builder.CloseElement();
-        //                builder.OpenComponent(11, typeof(PadDatePickerHeader));
-        //                builder.CloseComponent();
-        //            builder.CloseElement();
-        //            builder.OpenElement(12, "div");
-        //                builder.AddAttribute(13, "class", "p-1");
-        //                builder.OpenComponent(14, typeof(PadDatePickerBody));
-        //                builder.CloseComponent();
-        //            builder.CloseElement();
-        //            if (_bodyViewType.Equals(PadDatePickerViewType.Day) && (ShowToDayButton || ShowClearButton))
-        //            {
-        //                builder.OpenElement(15, "div");
-        //                    builder.OpenElement(16, "div");
-        //                    builder.AddAttribute(17, "class", Classes?.FooterWrapper);
-        //                    if (ShowToDayButton)
-        //                    {
-        //                        builder.OpenElement(18, "button");
-        //                        builder.AddAttribute(19, "@onclick", EventCallback.Factory.Create(this, GoToToday));
-        //                        builder.AddAttribute(20, "type", "button");
-        //                        builder.AddAttribute(21, "class", Classes?.GoToTodayButton);
-        //                        builder.AddContent(22, @ToDayButtonText);
-        //                        builder.CloseElement();
-        //                    }
-        //                    if (ShowClearButton)
-        //                    {
-        //                        builder.OpenElement(18, "button");
-        //                        builder.AddAttribute(19, "@onclick", EventCallback.Factory.Create(this, ClearButtonClick));
-        //                        builder.AddAttribute(20, "type", "button");
-        //                        builder.AddAttribute(21, "class", Classes?.ClearButton);
-        //                        builder.AddContent(22, ClearButtonText);
-        //                        builder.CloseElement();
-        //                    }
-        //                    builder.CloseElement();
-        //                builder.CloseElement();
-        //            }
-        //            if (FooterTemplate != null)
-        //            {
-        //                builder.AddContent(6, FooterTemplate);
-        //            }
-        //    builder.CloseElement();
-        //    builder.CloseComponent();
-        //}
+        [Parameter] public EventCallback<DateTimeOffset?> OnMonthChanged { get; set; }
+        [Parameter] public EventCallback<DateTimeOffset?> OnYearChanged { get; set; }
 
         protected override void OnInitialized()
         {
             _dateTimeManager = new DateTimeManager(Culture, MinDate, MaxDate);
         }
+
+        protected abstract DateTimeOffset GetDefaultDateTime();
         protected override void OnParametersSet()
         {
-            var dateTime = Value.GetValueOrDefault(DateTimeOffset.Now);
+            var dateTime = GetDefaultDateTime();
 
             _dateTimeManager.Culture = Culture;
             _dateTimeManager.MinDate = MinDate;
@@ -220,13 +211,13 @@ namespace PadDatePicker
                 dateTime = MaxDate.Value;
             }
 
-            _hour = Value.HasValue ? dateTime.Hour : 0;
-            _minute = Value.HasValue ? dateTime.Minute : 0;
+            _hour = dateTime.Hour;
+            _minute = dateTime.Hour;
 
             GenerateCalendarData(dateTime.DateTime);
 
             base.OnParametersSet();
-        }       
+        }
 
         protected PadDatePickerViewType _bodyViewType = PadDatePickerViewType.Day;
         protected PadDatePickerViewType _headerViewType = PadDatePickerViewType.Month;
@@ -255,8 +246,8 @@ namespace PadDatePicker
             _headerViewType = PadDatePickerViewType.YearRange;
         }
 
-        private int _hour;
-        private int _hourView
+        protected int _hour;
+        protected int _hourView
         {
             get
             {
@@ -294,8 +285,8 @@ namespace PadDatePicker
             }
         }
 
-        private int _minute;
-        private int _minuteView
+        protected int _minute;
+        protected int _minuteView
         {
             get => _minute;
             set
@@ -317,7 +308,7 @@ namespace PadDatePicker
             }
         }
 
-        private DateTimeManager _dateTimeManager;
+        protected DateTimeManager _dateTimeManager;
         private int? _selectedDateWeek;
         private int _yearPickerEndYear;
         private int _yearPickerStartYear;
@@ -339,8 +330,11 @@ namespace PadDatePicker
 
         public void GenerateMonthData(int year, int month)
         {
+            Selected = Culture.Calendar.ToDateTime(_dateTimeManager.SelectedYear, _dateTimeManager.SelectedMonth, _dateTimeManager.SelectedDay, _hour, _minute, 0, 0);
+
             _monthTitle = $"{Culture.DateTimeFormat.GetMonthName(month)} {year}";
-            _dateTimeManager.GenerateMonthData(Value, year, month);
+            //_monthTitle = $"{Culture.DateTimeFormat.GetMonthName(_dateTimeManager.SelectedMonth)} {_dateTimeManager.SelectedYear}";
+            _dateTimeManager.GenerateMonthData(Selected, year, month);
         }
 
         public string GetHeaderTitle()
@@ -356,9 +350,10 @@ namespace PadDatePicker
         public bool GetHeaderVisibility => !_headerViewType.Equals(PadDatePickerViewType.None);
         public int GetYearPickerStartYear => _yearPickerStartYear;
 
-        protected async Task ClearButtonClick()
+        protected abstract void ClearValue();
+        protected async Task ClearButtonClickd()
         {
-            Value = null;
+            ClearValue();
 
             _hour = 0;
             _minute = 0;
@@ -373,12 +368,18 @@ namespace PadDatePicker
             StateHasChanged();
         }
 
+        protected async Task OkButtonClicked()
+        {
+            await OnOkButtonClicked.InvokeAsync();
+        }
+
+        public abstract void SetValue(DateTime val);
         public async Task SelectDate(int dayIndex, int weekIndex)
         {
             _dateTimeManager.SelectDate(dayIndex, weekIndex);
 
             var currentDateTime = Culture.Calendar.ToDateTime(_dateTimeManager.SelectedYear, _dateTimeManager.SelectedMonth, _dateTimeManager.SelectedDay, _hour, _minute, 0, 0);
-            Value = new DateTimeOffset(currentDateTime, DateTimeOffset.Now.Offset);
+            SetValue(currentDateTime);
 
             GenerateMonthData(_dateTimeManager.SelectedYear, _dateTimeManager.SelectedMonth);
 
@@ -389,15 +390,15 @@ namespace PadDatePicker
         {
             if (IsMonthOutOfMinAndMaxDate(month)) return;
 
-            _dateTimeManager.SelectedMonth = month;
+            SetSelectedMonth(month);
 
             GenerateMonthData(_dateTimeManager.SelectedYear, _dateTimeManager.SelectedMonth);
 
             _headerViewType = PadDatePickerViewType.Month;
             _bodyViewType = PadDatePickerViewType.Day;
 
-            var currentDateTime = Culture.Calendar.ToDateTime(_dateTimeManager.SelectedYear, _dateTimeManager.SelectedMonth, _dateTimeManager.SelectedDay, _hour, _minute, 0, 0);
-            Value = new DateTimeOffset(currentDateTime, DateTimeOffset.Now.Offset);
+            Selected = Culture.Calendar.ToDateTime(_dateTimeManager.SelectedYear, _dateTimeManager.SelectedMonth, _dateTimeManager.SelectedDay, _hour, _minute, 0, 0);
+            OnMonthChanged.InvokeAsync(Selected);
 
             StateHasChanged();
         }
@@ -406,7 +407,7 @@ namespace PadDatePicker
         {
             if (IsYearOutOfMinAndMaxDate(year)) return;
 
-            _dateTimeManager.SelectedYear = year;
+            SetSelectedYear(year);
 
             ChangeYearRanges(_dateTimeManager.SelectedYear - 1);
 
@@ -415,19 +416,8 @@ namespace PadDatePicker
             _headerViewType = PadDatePickerViewType.Year;
             _bodyViewType = PadDatePickerViewType.Month;
 
-            var currentDateTime = Culture.Calendar.ToDateTime(_dateTimeManager.SelectedYear, _dateTimeManager.SelectedMonth, _dateTimeManager.SelectedDay, _hour, _minute, 0, 0);
-            Value = new DateTimeOffset(currentDateTime, DateTimeOffset.Now.Offset);
-
-            StateHasChanged();
-        }
-
-        public void HandleMonthChange(bool isNext)
-        {
-            if (CanChangeMonth(isNext) is false) return;
-
-            _dateTimeManager.HandleMonthChange(isNext, Value);
-
-            _monthTitle = $"{Culture.DateTimeFormat.GetMonthName(_dateTimeManager.SelectedMonth)} {_dateTimeManager.SelectedYear}";
+            Selected = Culture.Calendar.ToDateTime(_dateTimeManager.SelectedYear, _dateTimeManager.SelectedMonth, _dateTimeManager.SelectedDay, _hour, _minute, 0, 0);
+            OnYearChanged.InvokeAsync(Selected);
 
             StateHasChanged();
         }
@@ -436,7 +426,51 @@ namespace PadDatePicker
         {
             if (CanChangeYear(isNext) is false) return;
 
-            _dateTimeManager.HandleYearChange(isNext, Value);
+            if (isNext) SetSelectedYear(_dateTimeManager.SelectedYear + 1);
+            else SetSelectedYear(_dateTimeManager.SelectedYear - 1);
+
+            GenerateMonthData(_dateTimeManager.SelectedYear, _dateTimeManager.SelectedMonth);
+
+            StateHasChanged();
+        }
+
+        public void HandleMonthChange(bool isNext)
+        {
+            if (CanChangeMonth(isNext) is false) return;
+
+            if (isNext)
+            {
+                if (_dateTimeManager.SelectedMonth < 12)
+                {
+                    SetSelectedMonth(_dateTimeManager.SelectedMonth + 1);
+                }
+                else
+                {
+                    SetSelectedYear(_dateTimeManager.SelectedYear + 1);
+                    SetSelectedMonth(1);
+                }
+            }
+            else
+            {
+                if (_dateTimeManager.SelectedMonth > 1)
+                {
+                    SetSelectedMonth(_dateTimeManager.SelectedMonth - 1);
+                }
+                else
+                {
+                    SetSelectedYear(_dateTimeManager.SelectedYear - 1);
+                    SetSelectedMonth(12);
+                }
+            }
+
+            SetSelectedDay(1);
+
+            Selected = Culture.Calendar.ToDateTime(_dateTimeManager.SelectedYear, _dateTimeManager.SelectedMonth, _dateTimeManager.SelectedDay, _hour, _minute, 0, 0);
+            OnMonthChanged.InvokeAsync(Selected);
+
+            GenerateMonthData(_dateTimeManager.SelectedYear, _dateTimeManager.SelectedMonth);
+
+            //_monthTitle = $"{Culture.DateTimeFormat.GetMonthName(_dateTimeManager.SelectedMonth)} {_dateTimeManager.SelectedYear}";
 
             StateHasChanged();
         }
@@ -459,7 +493,7 @@ namespace PadDatePicker
 
         protected async Task GoToToday()
         {
-            Value = DateTime.Now;
+            Selected = DateTime.Now;
             GenerateCalendarData(DateTime.Now);
 
             await OnToDayButtonClicked.InvokeAsync();
@@ -475,11 +509,32 @@ namespace PadDatePicker
             await UpdateValue();
         }
 
+        public void SetSelectedYear(int year)
+        {
+            _dateTimeManager.SetSelectedYear(year);
+        }
+        public void SetSelectedMonth(int month)
+        {
+            _dateTimeManager.SetSelectedMonth(month);
+        }
+        public void SetSelectedDay(int day)
+        {
+            _dateTimeManager.SetSelectedDay(day);
+        }
+        public void SetSelectedHour(int hour)
+        {
+            _dateTimeManager.SetSelectedHour(hour);
+        }
+        public void SetSelectedMinute(int minute)
+        {
+            _dateTimeManager.SetSelectedMinute(minute);
+        }
+
         private void GenerateCalendarData(DateTime dateTime)
         {
-            _dateTimeManager.SelectedYear = Culture.Calendar.GetYear(dateTime);
-            _dateTimeManager.SelectedMonth = Culture.Calendar.GetMonth(dateTime);
-            _dateTimeManager.SelectedDay = Culture.Calendar.GetDayOfMonth(dateTime);
+            SetSelectedYear(Culture.Calendar.GetYear(dateTime));
+            SetSelectedMonth(Culture.Calendar.GetMonth(dateTime));
+            SetSelectedDay(Culture.Calendar.GetDayOfMonth(dateTime));
 
             _yearPickerStartYear = _dateTimeManager.SelectedYear - 1;
             _yearPickerEndYear = _dateTimeManager.SelectedYear + 10;
@@ -494,21 +549,25 @@ namespace PadDatePicker
         public bool IsToMonth(int month) => _dateTimeManager.IsToMonth(month);
         public bool IsSelectedMonth(int month) => _dateTimeManager.IsSelectedMonth(month);
         public bool IsToDay(int week, int day) => _dateTimeManager.IsToDay(week, day);
-        public bool IsSelectedDay(int week, int day) => _dateTimeManager.IsSelectedDay(week, day);
+        public bool IsDayInRange(int week, int day) => _dateTimeManager.IsDayInRange(StartHighlightDay, EndHighlightDay, week, day);
+        public abstract bool IsSelectedDay(int week, int day);
         public bool IsWeekDayOutOfMinAndMaxDate(int dayIndex, int weekIndex) => _dateTimeManager.IsWeekDayOutOfMinAndMaxDate(dayIndex, weekIndex);
         public bool IsInCurrentMonth(int week, int day) => _dateTimeManager.IsInCurrentMonth(week, day);
+        public DayOfWeek GetDayOfWeek(int index) => _dateTimeManager.GetDayOfWeek(index);
 
-        public DayOfWeek GetDayOfWeek(int index)
+        public void MouseOver(int week, int day)
         {
-            int dayOfWeek = (int)Culture.DateTimeFormat.FirstDayOfWeek + index;
-
-            if (dayOfWeek > 6)
+            HoverDay = _dateTimeManager.GetDateTime(week, day);
+            StateHasChanged();
+        }
+        public void MouseLeave(int week, int day)
+        {
+            if (HoverDay == _dateTimeManager.GetDateTime(week, day))
             {
-                dayOfWeek -= 7;
+                HoverDay = null;
             }
-
-            return (DayOfWeek)dayOfWeek;
-        }      
+            StateHasChanged();
+        }
 
         public bool CanChangeMonth(bool isNext)
         {
@@ -535,16 +594,16 @@ namespace PadDatePicker
         public bool CanChangeYear(bool isNext)
         {
             return (
-                    (isNext && MaxDate.HasValue && Culture.Calendar.GetYear(MaxDate.Value.DateTime) == _dateTimeManager.SelectedYear) ||
-                    (isNext is false && MinDate.HasValue && Culture.Calendar.GetYear(MinDate.Value.DateTime) == _dateTimeManager.SelectedYear)
+                    isNext && MaxDate.HasValue && Culture.Calendar.GetYear(MaxDate.Value.DateTime) == _dateTimeManager.SelectedYear ||
+                    isNext is false && MinDate.HasValue && Culture.Calendar.GetYear(MinDate.Value.DateTime) == _dateTimeManager.SelectedYear
                    ) is false;
         }
 
         private bool CanChangeYearRange(bool isNext)
         {
             return (
-                    (isNext && MaxDate.HasValue && Culture.Calendar.GetYear(MaxDate.Value.DateTime) < _yearPickerStartYear + 12) ||
-                    (isNext is false && MinDate.HasValue && Culture.Calendar.GetYear(MinDate.Value.DateTime) >= _yearPickerStartYear)
+                    isNext && MaxDate.HasValue && Culture.Calendar.GetYear(MaxDate.Value.DateTime) < _yearPickerStartYear + 12 ||
+                    isNext is false && MinDate.HasValue && Culture.Calendar.GetYear(MinDate.Value.DateTime) >= _yearPickerStartYear
                    ) is false;
         }
 
@@ -563,7 +622,7 @@ namespace PadDatePicker
         //    }
         //}
 
-        public string GetDayButtonCss(bool isEnable, bool isCurrent, bool isSelected)
+        public string GetDayButtonCss(bool isEnable, bool isCurrent, bool isSelected, bool isInRange)
         {
             ElementClassBuilder _mainBtnClassBuilder = new ElementClassBuilder();
             _mainBtnClassBuilder.Add(Classes?.DayButton);
@@ -575,9 +634,13 @@ namespace PadDatePicker
                 {
                     _mainBtnClassBuilder.Add(Classes?.SelectedDayButton);
                 }
-                else if(isCurrent && HighlightCurrent)
+                else if (isCurrent && HighlightCurrent)
                 {
                     _mainBtnClassBuilder.Add(Classes?.TodayDayButton);
+                }
+                else if (isInRange)
+                {
+                    _mainBtnClassBuilder.Add(Classes?.InRangeDayButton);
                 }
                 else
                 {
@@ -596,14 +659,10 @@ namespace PadDatePicker
 
         public DateTimeOffset GetDateTimeOfMonthCell(int monthIndex) => new(Culture.Calendar.ToDateTime(_dateTimeManager.SelectedYear, monthIndex, 1, 0, 0, 0, 0), DateTimeOffset.Now.Offset);
 
+        protected abstract void DoUpdateValue();
         private async Task UpdateValue()
         {
-            if (Value.HasValue is false) return;
-
-            var currentValueYear = Culture.Calendar.GetYear(Value.Value.LocalDateTime);
-            var currentValueMonth = Culture.Calendar.GetMonth(Value.Value.LocalDateTime);
-            var currentValueDay = Culture.Calendar.GetDayOfMonth(Value.Value.LocalDateTime);
-            Value = new DateTimeOffset(Culture.Calendar.ToDateTime(currentValueYear, currentValueMonth, currentValueDay, _hour, _minute, 0, 0), DateTimeOffset.Now.Offset);
+            DoUpdateValue();
         }
 
         private async Task ChangeTime(bool isNext, bool isHour)

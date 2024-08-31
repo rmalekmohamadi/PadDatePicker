@@ -24,11 +24,16 @@ namespace PadDatePicker
         public DateTimeOffset? MaxDate { get; set; }
         public DateTimeOffset? MinDate { get; set; }
 
-        public int SelectedYear { get; set; }
-        public int SelectedMonth { get; set; }
-        public int SelectedDay { get; set; }
-        public int SelectedHour { get; set; }
-        public int SelectedMinute { get; set; }
+        public int SelectedYear { get; private set; }
+        public int SelectedMonth { get; private set; }
+        public int SelectedDay { get; private set; }
+        public int SelectedHour { get; private set; }
+        public int SelectedMinute { get; private set; }
+        public void SetSelectedYear(int year) => SelectedYear = year;
+        public void SetSelectedMonth(int month) => SelectedMonth = month;
+        public void SetSelectedDay(int day) => SelectedDay = day;
+        public void SetSelectedHour(int hour) => SelectedHour = hour;
+        public void SetSelectedMinute(int minute) => SelectedMinute = minute;
 
         public int CurrentYear { get; set; }
         public int CurrentMonth { get; set; }
@@ -36,8 +41,49 @@ namespace PadDatePicker
 
         private readonly int[,] _daysOfCurrentMonth = new int[DEFAULT_WEEK_COUNT, DEFAULT_DAY_COUNT_PER_WEEK];
 
+        public DateTimeOffset GetDateTime(int week, int day) => Culture.Calendar.ToDateTime(SelectedYear, SelectedMonth, DaysOfCurrentMonth(week, day) ?? 1, 0, 0, 0, 0);
         public bool IsToDay(int week, int day) => CurrentYear == SelectedYear && CurrentMonth == SelectedMonth && CurrentDay == DaysOfCurrentMonth(week, day);
-        public bool IsSelectedDay(int week, int day) => SelectedDay == DaysOfCurrentMonth(week, day);
+        public bool IsSelectedDay(int week, int day) => CurrentYear == SelectedYear && CurrentMonth == SelectedMonth && SelectedDay == DaysOfCurrentMonth(week, day);
+        public bool IsSelectedDay(PadDateTimeRange value, int week, int day)
+        {
+            if (value.Start.HasValue)
+            {
+                var selectedStartYear = Culture.Calendar.GetYear(value.Start.Value.LocalDateTime);
+                var selectedStartMonth = Culture.Calendar.GetMonth(value.Start.Value.LocalDateTime);
+                var selectedStartDay = Culture.Calendar.GetDayOfMonth(value.Start.Value.LocalDateTime);
+
+                var start = SelectedYear == selectedStartYear && SelectedMonth == selectedStartMonth && selectedStartDay == DaysOfCurrentMonth(week, day);
+                if (start) return true;
+            }
+
+            if (value.End.HasValue)
+            {
+                var selectedEndYear = Culture.Calendar.GetYear(value.End.Value.LocalDateTime);
+                var selectedEndMonth = Culture.Calendar.GetMonth(value.End.Value.LocalDateTime);
+                var selectedEndDay = Culture.Calendar.GetDayOfMonth(value.End.Value.LocalDateTime);
+
+                var end = SelectedYear == selectedEndYear && SelectedMonth == selectedEndMonth && selectedEndDay == DaysOfCurrentMonth(week, day);
+                if (end) return true;
+            }
+
+            return false;
+        }
+
+        public bool IsSelectedDay(DateTimeOffset? value, int week, int day)
+        {
+            if (value.HasValue is false) return false;
+
+            var selectedYear = Culture.Calendar.GetYear(value.Value.LocalDateTime);
+            var selectedMonth = Culture.Calendar.GetMonth(value.Value.LocalDateTime);
+            var selectedDay = Culture.Calendar.GetDayOfMonth(value.Value.LocalDateTime);
+
+            var result = SelectedYear == selectedYear && SelectedMonth == selectedMonth && selectedDay == DaysOfCurrentMonth(week, day);
+            if(result)
+            {
+                return true;
+            }
+            return result;
+        }
         public bool IsToMonth(int index) => CurrentYear == SelectedYear && CurrentMonth == index;
         public bool IsSelectedMonth(int index) => SelectedMonth == index;
         public bool IsToYear(int year) => CurrentYear == year;
@@ -57,43 +103,6 @@ namespace PadDatePicker
 
         private int? _selectedDateWeek = null;
         private int? _selectedDateDayOfWeek = null;
-
-        public void HandleYearChange(bool isNext, DateTimeOffset? val)
-        {
-            SelectedYear += isNext ? +1 : -1;
-
-            GenerateMonthData(val, SelectedYear, SelectedMonth);
-        }
-
-        public void HandleMonthChange(bool isNext, DateTimeOffset? val)
-        {
-            if (isNext)
-            {
-                if (SelectedMonth < 12)
-                {
-                    SelectedMonth++;
-                }
-                else
-                {
-                    SelectedYear++;
-                    SelectedMonth = 1;
-                }
-            }
-            else
-            {
-                if (SelectedMonth > 1)
-                {
-                    SelectedMonth--;
-                }
-                else
-                {
-                    SelectedYear--;
-                    SelectedMonth = 12;
-                }
-            }
-
-            GenerateMonthData(val, SelectedYear, SelectedMonth);
-        }
 
         public void GenerateMonthData(DateTimeOffset? val, int year, int month)
         {
@@ -243,6 +252,43 @@ namespace PadDatePicker
             return month;
         }
 
+        public bool IsDayInRange(DateTimeOffset? startRange, DateTimeOffset? endRange, int weekIndex, int dayIndex)
+        {
+            try
+            {
+                var day = DaysOfCurrentMonth(weekIndex, dayIndex);
+                var month = FindMonth(weekIndex, dayIndex);
+
+                bool startIsInRange = false;
+                if (startRange != null && startRange.HasValue)
+                {
+                    var startDateYear = Culture.Calendar.GetYear(startRange.Value.DateTime);
+                    var startDateMonth = Culture.Calendar.GetMonth(startRange.Value.DateTime);
+                    var startDateDay = Culture.Calendar.GetDayOfMonth(startRange.Value.DateTime);
+
+                    if (SelectedYear >= startDateYear && SelectedMonth >= startDateMonth && day >= startDateDay) startIsInRange = true;
+                }
+                if (startIsInRange)
+                {
+                    if (endRange != null && endRange.HasValue)
+                    {
+                        var endDateYear = Culture.Calendar.GetYear(endRange.Value.DateTime);
+                        var endDateMonth = Culture.Calendar.GetMonth(endRange.Value.DateTime);
+                        var endDateDay = Culture.Calendar.GetDayOfMonth(endRange.Value.DateTime);
+
+                        if (SelectedYear <= endDateYear && month <= endDateMonth && day <= endDateDay) return true;
+                    }
+                    else return false;
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+
+            return false;
+        }
+
         public bool IsWeekDayOutOfMinAndMaxDate(int dayIndex, int weekIndex)
         {
             var day = _daysOfCurrentMonth[weekIndex, dayIndex];
@@ -339,6 +385,18 @@ namespace PadDatePicker
             }
 
             return new DateTimeOffset(Culture.Calendar.ToDateTime(currentYear, selectedMonth, currentDay, 0, 0, 0, 0), DateTimeOffset.Now.Offset);
+        }
+
+        public DayOfWeek GetDayOfWeek(int index)
+        {
+            int dayOfWeek = (int)Culture.DateTimeFormat.FirstDayOfWeek + index;
+
+            if (dayOfWeek > 6)
+            {
+                dayOfWeek -= 7;
+            }
+
+            return (DayOfWeek)dayOfWeek;
         }
     }
 }

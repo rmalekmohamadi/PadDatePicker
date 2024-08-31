@@ -1,6 +1,14 @@
 ﻿@namespace PadDatePicker
+@using global::PadDatePicker.Tools
 
-<PadDatePickerBtn IsEnable="@(!IsDisabled(Week, Day))" IsCurrent="@DatePicker.IsToDay(Week, Day)" IsSelected="@DatePicker.IsSelectedDay(Week, Day)" OnClick="@((e) => DatePicker.SelectDate(Day, Week))">
+<PadDatePickerBtn 
+    OnMouseOver="@((e) => DatePicker.MouseOver(Week, Day))"
+    OnMouseLeave="@((e) => DatePicker.MouseLeave(Week, Day))"
+    IsEnable="@(!IsDisabled(Week, Day))" 
+    IsCurrent="@DatePicker.IsToDay(Week, Day)" 
+    IsSelected="@DatePicker.IsSelectedDay(Week, Day)" 
+    IsInRange="@DatePicker.IsDayInRange(Week, Day)" 
+    OnClick="@((e) => DatePicker.SelectDate(Day, Week))">
     @if (DatePicker.DayCellTemplate is not null)
     {
         @DatePicker.DayCellTemplate(DatePicker.GetDateTimeOfDayCell(Day, Week))
